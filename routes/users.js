@@ -18,6 +18,44 @@ router.get("/me", [auth], async (req, res) => {
   res.send(user);
 });
 
+router.get("/me", [auth], async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password -__v");
+  res.send(user);
+});
+
+router.get("/friends", [auth], async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password -__v");
+
+  const friends = await User.find({
+    _id: user.friends,
+  });
+
+  res.send(friends);
+});
+
+router.post("/add-friend/:id", [auth], async (req, res) => {
+  if (req.params.id === req.user._id)
+    return res.status(400).send("You cannot add yourself as a friend.");
+
+  const user = await User.findById(req.user._id).select("-password -__v");
+  if (!user)
+    return res
+      .status(400)
+      .send("The user with the given ID could not be found.");
+
+  const friend = await User.findById(req.params.id);
+  if (!friend)
+    return res
+      .status(400)
+      .send("The user with the given ID could not be found.");
+
+  user.friends.push(friend._id);
+
+  await user.save();
+
+  res.status(200).send("Friend Added.");
+});
+
 router.post("/", async (req, res) => {
   // validate input
   const { error } = validate(req.body);
