@@ -18,17 +18,23 @@ router.get("/me", [auth], async (req, res) => {
   res.send(user);
 });
 
-router.get("/me", [auth], async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password -__v");
-  res.send(user);
-});
-
 router.get("/friends", [auth], async (req, res) => {
   const user = await User.findById(req.user._id).select("-password -__v");
 
-  const friends = await User.find({
-    _id: user.friends,
-  });
+  const friends = await User.find(
+    {
+      _id: user.friends,
+    },
+    [
+      "_id",
+      "firstName",
+      "lastName",
+      "email",
+      "hasCovid",
+      "lastExposed",
+      "vaccination",
+    ]
+  );
 
   res.send(friends);
 });
@@ -117,6 +123,11 @@ router.post("/remove-friend/:id", [auth], async (req, res) => {
   await user.save();
 
   res.status(200).send("Friend removed.");
+});
+
+router.delete("/me", [auth], async (req, res) => {
+  await User.findOneAndDelete(req.user._id);
+  res.send("User deleted successfully.");
 });
 
 module.exports = router;
