@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema({
   lastExposed: { type: Date, required: false },
   vaccination: {
     type: { type: String, enum: ["moderna", "pfizer", "j&j", "other"] },
-    firstVac: { type: Date, required: true },
-    secondVac: { type: Date, required: false },
+    firstVac: { type: Date },
+    secondVac: { type: Date },
     required: false,
   },
   friends: [
@@ -26,30 +26,27 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-userSchema.methods.generateAuthToken = () => {
+userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: this._id,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
     },
     config.get("jwtPrivateKey")
   );
   return token;
 };
 
-validate = (user) => {
-  const schema = {
+const User = mongoose.model("User", userSchema);
+
+const validate = (user) => {
+  const schema = Joi.object({
     firstName: Joi.string().required().label("First Name").min(1).max(64),
     lastName: Joi.string().required().label("Last Name").min(1).max(64),
-    email: Joi.string().email({ minDomainAtoms: 2 }).required().label("Email"),
+    email: Joi.string().email().required().label("Email"),
     password: Joi.string().required().label("Password").min(8).max(1024),
-  };
-  return Joi.validate(user, schema);
+  });
+  return schema.validate(user);
 };
-
-const User = mongoose.model("User", userSchema);
 
 exports.User = User;
 exports.validate = validate;

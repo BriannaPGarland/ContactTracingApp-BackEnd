@@ -1,4 +1,4 @@
 {
-  "jwtPrivateKey": "soj_jwtPrivateKey",
-  "db": "soj_db"
+  "jwtPrivateKey": "traq_jwtPrivateKey",
+  "db": "traq_db"
 }
