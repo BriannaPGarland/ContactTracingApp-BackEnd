@@ -133,3 +133,18 @@
 {"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T15:44:54.346Z"}
 {"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T15:47:04.302Z"}
 {"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T15:47:04.349Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:15:53.979Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:15:54.001Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:21:44.294Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:21:44.314Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:24:55.258Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:24:55.280Z"}
+{"message":"friend is not defined","stack":"ReferenceError: friend is not defined\n    at C:\\Users\\Nathan\\Code\\traq\\routes\\users.js:111:44\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)","level":"error","timestamp":"2021-03-29T16:25:57.783Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:27:27.039Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:27:27.068Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:30:22.067Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:30:22.098Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:30:36.368Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:30:36.397Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2021-03-29T16:30:52.989Z"}
+{"level":"info","message":"Connected to mongodb://localhost/traq...","timestamp":"2021-03-29T16:30:53.041Z"}
