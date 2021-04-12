@@ -48,5 +48,15 @@ const validate = (user) => {
   return schema.validate(user);
 };
 
+const validateVac = (vac) => {
+  const schema = Joi.object({
+    type: Joi.string().required().valid("moderna", "pfizer", "j&j", "other"),
+    firstVac: Joi.date(),
+    secondVac: Joi.date(),
+  });
+  return schema.validate(vac);
+};
+
 exports.User = User;
 exports.validate = validate;
+exports.validateVac = validateVac;
