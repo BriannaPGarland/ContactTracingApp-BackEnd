@@ -5,7 +5,12 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-const { User, validate, validateVac } = require("../models/user");
+const {
+  User,
+  validate,
+  validateVac,
+  validateCovidStatus,
+} = require("../models/user");
 const auth = require("../middleware/auth");
 
 router.get("/", async (req, res) => {
@@ -128,6 +133,22 @@ router.put("/add-vaccination", [auth], async (req, res) => {
     return res.status(404).send("The user with the given ID was not found.");
 
   res.status(200).send("Vaccination added.");
+});
+
+router.put("/covid-status", [auth], async (req, res) => {
+  const { error } = validateCovidStatus(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    _.pick(req.body, ["hasCovid", "lastExposed"])
+  );
+  if (!user)
+    return res
+      .status(400)
+      .send("The user with the given ID could not be found.");
+
+  res.status(200).send("Status updated.");
 });
 
 router.delete("/me", [auth], async (req, res) => {

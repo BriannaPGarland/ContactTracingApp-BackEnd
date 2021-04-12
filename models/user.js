@@ -57,6 +57,15 @@ const validateVac = (vac) => {
   return schema.validate(vac);
 };
 
+const validateCovidStatus = (status) => {
+  const schema = Joi.object({
+    hasCovid: Joi.boolean().required(),
+    lastExposed: Joi.date(),
+  });
+  return schema.validate(status);
+};
+
 exports.User = User;
 exports.validate = validate;
 exports.validateVac = validateVac;
+exports.validateCovidStatus = validateCovidStatus;
