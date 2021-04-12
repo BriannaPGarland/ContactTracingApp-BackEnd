@@ -13,8 +13,8 @@ const {
 } = require("../models/user");
 const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
-  const users = await User.find().sort("lastName");
+router.get("/", [auth], async (req, res) => {
+  const users = await User.find().select("-password -__v").sort("lastName");
   res.send(users);
 });
 
